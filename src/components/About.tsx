@@ -35,7 +35,7 @@ const About = () => {
   }, [hasAnimated]);
 
   return (
-    <div className='relative flex flex-col w-full h-screen p-12 lg:p-24 justify-center items-center bg-black z-10'>
+    <div id="about" className='relative flex flex-col w-full h-screen p-12 lg:p-24 justify-center items-center bg-black z-10'>
       <motion.div
         ref={ref}
         initial={{ opacity: 0, y: 50 }}
@@ -43,7 +43,7 @@ const About = () => {
         transition={{ duration: 0.5 }}
         className='flex z-50 flex-col w-full text-xl leading-[2] md:text-3xl max-w-4xl md:leading-[2]'
       >
-        Welcome to iDEA agency, where creativity meets technology. We are a team of passionate designers and developers dedicated to crafting stunning websites that not only look great but also deliver exceptional user experiences. With years of industry experience, we specialize in creating custom digital solutions tailored to your business needs. Our mission is to elevate your brand online and help you stand out in the digital landscape.
+        I'm a passionate freelance animator turning ideas into vibrant motion. From character animation to dynamic explainer videos, every project is a chance to tell a story. With creativity at the core and precision in every frame, I help brands, creators, and dreamers bring their vision to life—beautifully and boldly.
       </motion.div>
     </div>
   );

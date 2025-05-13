@@ -5,7 +5,8 @@ export default function Contact() {
     <section id="contact" className="w-full py-20 px-4 bg-black text-white">
       <div className="max-w-3xl mx-auto text-center">
         <h2 className="text-4xl font-bold mb-6">Let's Connect</h2>
-        <p className="mb-8 text-gray-400">Have a project or idea in mind? I'm always up for a creative conversation.</p>
+        <p className="mb-8 text-gray-400">Got a video to edit? A YouTube channel to grow? A campaign to launch? <h1></h1>Lets bring your story to lifeand help it reach the right audience.
+        </p>
 
         <form className="flex flex-col gap-4">
   <input

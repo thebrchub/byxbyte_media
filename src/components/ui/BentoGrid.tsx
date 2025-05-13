@@ -159,7 +159,14 @@ export const BentoGridItem = ({
 
               <button
                 type="button"
-                className="text-sm relative z-20 px-4 py-2 bg-white text-black rounded-full text-center creativeBtn" >
+                onClick={() => {
+                  const el = document.getElementById("contact");
+                  if (el) {
+                    el.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+                className="text-sm relative z-20 px-4 py-2 bg-white text-black rounded-full text-center creativeBtn"
+              >
                 <span>Let&apos;s Talk</span>
               </button>
             </div>

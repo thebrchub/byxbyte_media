@@ -43,7 +43,16 @@ const About = () => {
         transition={{ duration: 0.5 }}
         className='flex z-50 flex-col w-full text-xl leading-[2] md:text-3xl max-w-4xl md:leading-[2]'
       >
-        I'm a passionate freelance animator turning ideas into vibrant motion. From character animation to dynamic explainer videos, every project is a chance to tell a story. With creativity at the core and precision in every frame, I help brands, creators, and dreamers bring their vision to life—beautifully and boldly.
+        At Byxbyte Media, we believe editing is just the beginning. We help creators, brands, and agencies
+        not only produce great contentbut also reach the right audience.
+        Whether youre posting a YouTube video, running a brand campaign, or dropping a new music
+        video, our team ensures your content is polished, optimized, and designed to perform.
+        <h1></h1>What Makes Us Different:
+        <h1></h1>- Pro-level Video Editing
+        <h1></h1>- YouTube Strategy & Growth Consulting
+        <h1></h1>- SEO-Optimized Titles, Tags & Descriptions
+        <h1></h1>- Custom Thumbnail Design that grabs attention
+        <h1></h1>- Channel audits & content planning to boost reach and retention. 
       </motion.div>
     </div>
   );

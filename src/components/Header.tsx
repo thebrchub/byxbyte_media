@@ -52,7 +52,7 @@ const Header = () => {
   return (
     <header className='w-full fixed top-0 z-50 px-6 py-4 bg-black/60 backdrop-blur-md flex items-center justify-between'>
       <div className='flex'>
-        <span className='text-2xl font-bold'>BRC HUB</span>
+        <span className='text-2xl font-bold'>Byxbyte Media</span>
       </div>
       <div className='flex items-center gap-10'>
         <ul className='flex gap-10 text-gray-400'>

@@ -1,0 +1,21 @@
+// types.ts
+export type WorkItem = {
+  id: number;
+  title: string;
+  description: string;
+  category: "Advertisement" | "Music Video"; 
+  // 🚀 future expansion
+  // | "Corporate"
+  // | "Documentary"
+  // | "E-commerce"
+  tag: string;
+  img: string;
+  albums?: {
+    title: string;
+    cover: string;
+    images: string[];
+  }[];
+  youtubeLinks?: string[];
+  beforeAfterPairs?: { before: string; after: string }[];
+  year?: number;
+};

@@ -1,21 +1,15 @@
-import About from "@/components/About";
 import Hero from "@/components/Hero";
-import Services from '@/components/Services';
-import LenisScroll from '@/components/ui/LenisScroll';
-import Works from "@/components/Works";
 import Header from "@/components/Header";
-import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
+import Testimonials from "@/components/Testimonials";
 
 export default function Home() {
   return (
-    <main className='flex relative min-h-screen flex-col items-center justify-between overflow-x-hidden'>
-      <LenisScroll />
-      <Header/>
+    <main className="flex flex-col min-h-screen overflow-x-hidden">
+      <Header />
       <Hero />
-      <About />
-      <Services />
-      <Works />
-      <Contact />
+      <Testimonials/>
+      {/* <Footer /> */}
     </main>
   );
 }

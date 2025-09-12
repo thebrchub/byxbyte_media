@@ -59,7 +59,7 @@ html.lenis, html.lenis body {
 }
 .creativeBtn:after {
   content: '';
-  width: 100px;
+  width: 150px;
   height: 100px;
   border-radius: 100%;
   background:#000;
@@ -162,3 +162,25 @@ html.lenis, html.lenis body {
 .orbStyle {
   animation: slideFadeInUp 1s ease forwards;
 }
+
+/* Horizontal scroll */
+@keyframes scroll-x {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-scroll-x { animation: scroll-x 40s linear infinite; }
+.animate-scroll-x-slow { animation: scroll-x 60s linear infinite; }
+.animate-scroll-x-fast { animation: scroll-x 20s linear infinite; }
+
+/* Vertical scroll */
+@keyframes scroll-y {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+.animate-scroll-y { animation: scroll-y 40s linear infinite; }
+.animate-scroll-y-slow { animation: scroll-y 60s linear infinite; }
+.animate-scroll-y-fast { animation: scroll-y 20s linear infinite; }
+
+/* Pause on hover */
+.pause-animation { animation-play-state: paused !important; }
+

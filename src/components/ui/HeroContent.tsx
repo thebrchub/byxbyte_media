@@ -14,21 +14,33 @@ export default function HeroContent() {
         <div className="w-full h-screen flex flex-col items-center justify-center">
             <div className="absolute h-full pointer-events-none inset-0 flex items-center justify-center bg-slate-950 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
             <p
-                className="hero-text-1 text-4xl lg:text-7xl font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b text-white max-w-4xl text-center mix-blend-difference"
+                className="hero-text-1 text-3xl lg:text-7xl font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b text-white max-w-5xl text-center mix-blend-difference"
             >
-                Transforming Ideas into Digital Excellence
+               Editing That Tells Your Story And Helps It Reach Further
             </p>
             <p
                 className="hero-text-2 text-sm lg:textlg relative z-20 bg-clip-text text-transparent bg-gradient-to-b text-white py-8 max-w-sm md:max-w-4xl text-center"
             >
-                Creating bespoke, innovative web solutions that drive your business forward.
+                Byxbyte Media is a Mumbai-based video editing agency helping creators and brands craft impactful
+                videos and grow their audience. From cinematic edits to scroll-stopping thumbnails, we turn your
+                raw footage into content that performs.
             </p>
+            <div className="flex flex-wrap justify-center items-center gap-4 mt-6 z-20">
             <button
                 type="button"
-                className="hero-button text-sm relative z-20 px-4 py-2 bg-white text-black rounded-full text-center creativeBtn"
+                className="hero-button text-sm px-4 py-2 bg-white text-black rounded-full text-center creativeBtn"
+                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
             >
-                <span>Get Started</span>
+                <span>View Portfolio</span>
             </button>
+            <button
+                type="button"
+                className="hero-button text-sm px-4 py-2 bg-white text-black rounded-full text-center creativeBtn"
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+                <span>Grow Your Channel</span>
+            </button>
+            </div>
         </div>
     )
 }

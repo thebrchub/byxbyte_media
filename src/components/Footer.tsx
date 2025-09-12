@@ -77,21 +77,37 @@ export function Footer() {
     }, []);
 
     return (
-        <footer className="flex relative flex-col container py-12 h-screen justify-evenly">
-            <div className='flex flex-col'>
-                <ul className="flex flex-col gap-5 uppercase w-24">
-                    {['About', 'Services', 'Works', 'Contact'].map((text, index) => (
-                        <li
-                            key={index}
-                            ref={(el) => { listItemsRef.current[index] = el; }}
-                            className="relative overflow-hidden h-5 cursor-pointer"
-                        >
-                            <span className="block initial absolute top-0 left-0 w-full h-full">{text}</span>
-                            <span className="block hover absolute top-0 left-0 w-full h-full">{text}</span>
-                        </li>
-                    ))}
-                </ul>
+        <footer className="container py-12 h-auto">
+        <div className="flex flex-col md:flex-row justify-between gap-10">
+          {/* Navigation Section */}
+          <div>
+            <ul className="flex flex-col gap-5 uppercase w-24">
+              {['Home','About', 'Services', 'Works', 'Contact'].map((text, index) => (
+                <li
+                  key={index}
+                  ref={(el) => { listItemsRef.current[index] = el; }}
+                  className="relative overflow-hidden h-5 cursor-pointer"
+                >
+                  <span className="block initial absolute top-0 left-0 w-full h-full">{text}</span>
+                  <span className="block hover absolute top-0 left-0 w-full h-full">{text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+      
+          {/* Contact Info Section */}
+          <div className="max-w-md">
+            <h2 className="text-xl md:text-2xl font-semibold uppercase mb-4">Contact Us</h2>
+            <p className="mb-2">Got a video to edit? A YouTube channel to grow? A campaign to launch? </p>
+            <p className="mb-4">Let’s bring your story to life and help it reach the right audience</p>
+            <div className="space-y-1">
+            <p><strong>Email:</strong> <a href="mailto:contact@byxbytemedia.com" className="text-orange-400 hover:text-orange-300 transition-colors">contact@byxbytemedia.com</a></p>
+            <p><strong>Phone:</strong> <a href="tel:+919359136696" className="text-orange-400 hover:text-orange-300 transition-colors">+91 93591 36696</a></p>
+            <p><strong>Location:</strong> Mumbai, Maharashtra, India</p>
             </div>
+          </div>
+        </div>
+            
             <div className='relative overflow-hidden group/line py-12 mx-auto w-fit cursor-pointer'>
                 {/* <h1 className='w-full text-[12vw] uppercase leading-none'>Let&apos;s Talk</h1> */}
                 <span className='block w-full bg-white h-3 -translate-x-full group-hover/line:translate-x-0 duration-500 opacity-0 group-hover/line:opacity-100' />
@@ -120,7 +136,7 @@ export function Footer() {
                     </div>
                 </div>
                 <div className='flex gap-10 uppercase'>
-                    <span>2024 © CharltonK.dev</span>
+                    <span>2025 © Byxbyte Media</span>
                 </div>
             </div>
         </footer>

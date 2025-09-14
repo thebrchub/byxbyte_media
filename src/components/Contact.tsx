@@ -16,6 +16,7 @@ export default function Contact() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const node = ref.current; // copy ref.current to a local variable
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !hasAnimated) {
@@ -26,21 +27,16 @@ export default function Contact() {
           setHasAnimated(false);
         }
       },
-      {
-        threshold: 0.3,
-      }
+      { threshold: 0.3 }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
+    if (node) observer.observe(node);
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
+      if (node) observer.unobserve(node);
     };
   }, [hasAnimated]);
+
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -126,14 +122,15 @@ export default function Contact() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
-              Let's Connect
+              Let&apos;s Connect
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-8 rounded-full"></div>
             <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
               Got a video to edit? A YouTube channel to grow? A campaign to launch?
               <br />
-              <span className="text-white font-medium">Let's bring your story to life</span> and help it reach the right audience.
+              <span className="text-white font-medium">Let&apos;s bring your story to life</span> and help it reach the right audience.
             </p>
+
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-16 items-start">

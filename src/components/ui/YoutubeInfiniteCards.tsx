@@ -178,9 +178,17 @@ const YoutubeInfiniteCards: React.FC<YoutubeInfiniteCardsProps> = ({
           })}
         </div>
 
-        {/* Enhanced Fade edges */}
-        <div className="absolute top-0 left-0 w-40 h-full bg-gradient-to-r from-gray-900 via-gray-900/80 to-transparent pointer-events-none z-10" />
-        <div className="absolute top-0 right-0 w-40 h-full bg-gradient-to-l from-gray-900 via-gray-900/80 to-transparent pointer-events-none z-10" />
+        {/* Enhanced Fade edges with multiple layers */}
+        <div className="absolute top-0 left-0 w-56 h-full bg-gradient-to-r from-gray-900 via-gray-900/90 via-gray-900/60 to-transparent pointer-events-none z-10" />
+        <div className="absolute top-0 right-0 w-56 h-full bg-gradient-to-l from-gray-900 via-gray-900/90 via-gray-900/60 to-transparent pointer-events-none z-10" />
+        
+        {/* Inner glow gradients */}
+        <div className="absolute top-0 left-56 w-20 h-full bg-gradient-to-r from-blue-500/10 via-purple-500/5 to-transparent pointer-events-none z-10" />
+        <div className="absolute top-0 right-56 w-20 h-full bg-gradient-to-l from-blue-500/10 via-purple-500/5 to-transparent pointer-events-none z-10" />
+        
+        {/* Outer shadow edges */}
+        <div className="absolute top-0 left-0 w-24 h-full bg-gradient-to-r from-black/40 to-transparent pointer-events-none z-10" />
+        <div className="absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-black/40 to-transparent pointer-events-none z-10" />
       </div>
 
       {selectedVideo && (

@@ -107,7 +107,7 @@ import { WorkItem } from "../components/type/work";
     
 //     {
 //         id: 7,
-//         title: "Let's start a project together?",
+//         title: "Let&apos;s start a project together?",
 //         description: "",
 //         className: "lg:col-span-5 md:col-span-5 md:row-span-1",
 //         imgClassName: "",
@@ -285,7 +285,7 @@ export const workItems: WorkItem[] = [
        {url: "https://www.youtube.com/embed/YCSbr_ml_sM", title: "BMW Electric - Future Drive"},
        {url: "https://www.youtube.com/embed/9dS4O_3kbww", title: "Apple iPhone - Pro Features"},
        {url: "https://www.youtube.com/embed/o7kG67JZS-Q", title: "Adidas Ultraboost - Run Free"},
-       {url: "https://www.youtube.com/embed/dvhVEufOLVQ", title: "McDonald's Happy Meal - Joyful Moments"},
+       {url: "https://www.youtube.com/embed/dvhVEufOLVQ", title: "McDonald&apos;s Happy Meal - Joyful Moments"},
     //    {url: "https://www.youtube.com/embed/vFX4yRZ 
     //     "https://www.youtube.com/embed/g6WpvTM7ckI",
     //     "https://www.youtube.com/embed/TGKqM7gfM3k",

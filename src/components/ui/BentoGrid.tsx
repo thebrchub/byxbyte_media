@@ -252,7 +252,7 @@ export const BentoGridItem = ({
         {id === 6 ? (
           <div className="mt-6 relative z-20 flex items-center justify-center">
             <button className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full text-base font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover:scale-105">
-              Let's Talk
+              Let&apos;s Talk
             </button>
           </div>
         ) : (

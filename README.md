@@ -1,41 +1,47 @@
 # Agency Website
 
-Welcome to the **Agency Website** project! This is a modern, responsive website template built using **Next.js**. It's designed to showcase agency services with a sleek and interactive design, incorporating 3D elements using **Spline**, and animations with **Framer Motion**. The website is styled with **Tailwind CSS** and developed with **TypeScript** for robust type safety.
+Welcome to the **Agency Website** project! This is a modern, responsive website template built using **Next.js**, designed to showcase agency services with a sleek and interactive design. It includes **3D elements** powered by **Spline** and smooth **animations** with **Framer Motion**. The project uses **Tailwind CSS** for styling and **TypeScript** for type safety.
 
+---
 
 ## 🔗 Live Demo
 
-Check out the live version of the Agency Website:  
-[**Live Demo**](https://agency01.vercel.app/)
+Check out the live version of the website here:  
+[**Live Demo**](https://yourusername.github.io/agency-website/) <!-- Replace with your actual deployment URL -->
+
+---
 
 ## 🚀 Purpose
 
-The goal of this project is to provide a visually stunning and interactive website template for agencies. The website features:
+This project provides a visually stunning and interactive template for agencies. Key features include:
 
-- A modern, professional design.
-- 3D elements and animations to enhance user experience.
-- Responsive layout to ensure optimal viewing on all devices.
+- Professional, modern design optimized for agencies and businesses.  
+- 3D elements and animations to enhance user engagement.  
+- Fully responsive layout for all device sizes.  
+- Easily customizable with reusable components and modern frameworks.  
 
-Built with **Next.js** for server-side rendering and static site generation, **Tailwind CSS** for utility-first styling, **Framer Motion** for animations, **Spline** for 3D graphics, and **TypeScript** for type safety, this template offers both flexibility and performance.
+The template leverages **Next.js** for server-side rendering and static site generation, **Tailwind CSS** for utility-first styling, **Framer Motion** for interactive animations, **Spline** for 3D graphics, and **TypeScript** for better maintainability and type safety.
 
-## 🛠️ Frameworks & Technologies
+---
 
-This project utilizes the following technologies:
+## 🛠️ Technologies
 
-- **Next.js** - React framework for server-side rendering (SSR) and static site generation (SSG).
-- **React** - For building the user interface with reusable components.
-- **Tailwind CSS** - For utility-first styling and responsive design.
-- **Framer Motion** - For smooth animations and interactive elements.
-- **Spline** - For integrating 3D graphics into the website.
-- **TypeScript** - For static type checking and improved code quality.
+- **Next.js** – React framework for SSR and SSG.  
+- **React** – For building reusable UI components.  
+- **Tailwind CSS** – Utility-first styling and responsive design.  
+- **Framer Motion** – Smooth animations and interactive elements.  
+- **Spline** – 3D graphics integration.  
+- **TypeScript** – Static typing and improved code quality.
+
+---
 
 ## 📝 Setup & Customization
 
-To get started with the project:
+To get started:
 
 ```bash
-# Clone the repository
-git clone https://github.com/charltonkdev/agency-website.git
+# Clone your repository
+git clone https://github.com/yourusername/agency-website.git
 
 # Navigate to the project folder
 cd agency-website
@@ -43,8 +49,7 @@ cd agency-website
 # Install dependencies
 npm install
 
-# Run the development server
+# Start the development server
 npm run dev
 
-# Open http://localhost:3000 in your browser to view the project
-```
+# Open http://localhost:3000 to view the project

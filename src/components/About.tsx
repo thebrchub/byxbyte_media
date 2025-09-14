@@ -9,6 +9,7 @@ const About = () => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const node = ref.current; // copy ref to avoid stale ref warning
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !hasAnimated) {
@@ -24,13 +25,13 @@ const About = () => {
       }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    if (node) {
+      observer.observe(node);
     }
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (node) {
+        observer.unobserve(node);
       }
     };
   }, [hasAnimated]);
@@ -100,7 +101,7 @@ const About = () => {
               not only produce great content but also reach the right audience.
             </p>
             <p>
-              Whether you're posting a YouTube video, running a brand campaign, or dropping a new music 
+              Whether you&apos;re posting a YouTube video, running a brand campaign, or dropping a new music 
               video, our team ensures your content is polished, optimized, and designed to perform.
             </p>
           </motion.div>
@@ -152,7 +153,7 @@ const About = () => {
                     {feature.icon}
                   </div>
                   <p className="ml-4 text-gray-300 font-medium group-hover:text-white transition-colors">
-                    {feature.text}
+                    {feature.text.replace(/'/g, "&apos;")}
                   </p>
                 </motion.div>
               ))}

@@ -154,7 +154,7 @@ export default function Contact() {
                 >
                   <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
                   <h4 className="text-xl font-semibold text-white mb-2">Message Sent!</h4>
-                  <p className="text-gray-300">We'll get back to you within 24 hours.</p>
+                 <p className="text-gray-300">We&apos;ll get back to you within 24 hours.</p>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">

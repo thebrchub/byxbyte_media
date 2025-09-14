@@ -47,7 +47,7 @@ export default function index() {
 				</motion.div>
 			</div>
 			<div className="relative block w-[100vw] h-[50vh] pt-[100px]">
-				<Image alt src="/b5.jpg" objectFit="cover" width={1280} height={1080}/>
+				<Image alt="" src="/b5.jpg" style={{ objectFit: "cover" }} width={1280} height={1080} />
 			</div>
 		</div>
 	);

@@ -99,7 +99,7 @@ export function Footer() {
           <div className="max-w-md">
             <h2 className="text-xl md:text-2xl font-semibold uppercase mb-4">Contact Us</h2>
             <p className="mb-2">Got a video to edit? A YouTube channel to grow? A campaign to launch? </p>
-            <p className="mb-4">Let’s bring your story to life and help it reach the right audience</p>
+            <p className="mb-4">Let&apos;s bring your story to life and help it reach the right audience</p>
             <div className="space-y-1">
             <p><strong>Email:</strong> <a href="mailto:Tanmaynikumbh@byxbytemedia.com" className="text-orange-400 hover:text-orange-300 transition-colors">Tanmaynikumbh@byxbytemedia.com</a></p>
             <p><strong>Phone:</strong> <a href="tel:+919359136696" className="text-orange-400 hover:text-orange-300 transition-colors">+91 93591 36696</a></p>

@@ -2,6 +2,7 @@
 "use client";
 import React, { useState } from "react";
 import { cn } from "@/utils/cn";
+import Image from 'next/image';
 
 /* ---------- BentoGrid ---------- */
 export const BentoGrid = ({
@@ -76,7 +77,7 @@ const InfiniteScrollMedia = ({
                 className="w-full h-full object-cover rounded-lg"
               />
             ) : (
-              <img
+              <Image
                 src={item.src}
                 alt={item.alt || "media"}
                 className="w-full h-full object-cover rounded-lg"
@@ -95,7 +96,7 @@ const InfiniteScrollMedia = ({
             {item.type === "video" ? (
               <video src={item.src} autoPlay muted loop playsInline className="w-full h-full object-cover rounded-lg" />
             ) : (
-              <img src={item.src} alt={item.alt || "media"} className="w-full h-full object-cover rounded-lg" />
+              <Image src={item.src} alt={item.alt || "media"} className="w-full h-full object-cover rounded-lg" />
             )}
           </div>
         ))}
@@ -206,7 +207,7 @@ export const BentoGridItem = ({
         ) : (
           <>
             {img && (
-              <img
+              <Image
                 src={img}
                 alt={typeof title === "string" ? title : "Service"}
                 className={cn(
@@ -216,7 +217,7 @@ export const BentoGridItem = ({
               />
             )}
             {spareImg && (
-              <img
+              <Image
                 src={spareImg}
                 alt={typeof title === "string" ? title : "Service"}
                 className="absolute right-0 bottom-0 object-cover object-center w-full h-full opacity-40 group-hover/bento:opacity-60 transition-opacity duration-500"

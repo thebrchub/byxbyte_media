@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { Play, X, ExternalLink, ChevronLeft, ChevronRight, Pause } from "lucide-react";
+import Image from 'next/image';
 
 // New type for videos
 export interface YoutubeVideo {
@@ -140,7 +141,7 @@ const YoutubeInfiniteCards: React.FC<YoutubeInfiniteCardsProps> = ({
               >
                 <div className="w-full h-full rounded-xl overflow-hidden bg-gray-900 relative shadow-lg">
                   {thumbnail && (
-                    <img
+                    <Image
                       src={thumbnail}
                       alt={video.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"

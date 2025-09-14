@@ -2,6 +2,7 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
+import Image from 'next/image';
 
 type Step = {
   title: string;
@@ -47,7 +48,7 @@ const CarouselSection: React.FC<CarouselSectionProps> = ({ title, steps }) => {
 
                 <div className="relative rounded-2xl overflow-hidden shadow-lg group">
                   {/* Image */}
-                  <img
+                  <Image
                     src={step.image}
                     alt={step.title}
                     className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"

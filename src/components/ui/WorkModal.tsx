@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import Image from 'next/image';
 
 export type YoutubeVideo = {
   url: string;
@@ -133,7 +134,7 @@ export default function WorkModal({ work, onClose }: WorkModalProps) {
                             key={idx}
                             className="aspect-video rounded-xl overflow-hidden bg-gray-900"
                           >
-                            <img
+                            <Image
                               src={img}
                               alt={`${album.title} ${idx + 1}`}
                               className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"

@@ -68,21 +68,21 @@ export default function Contact() {
     {
       icon: <Mail className="w-5 h-5" />,
       label: "Email",
-      value: "hello@byxbytemedia.com",
-      href: "mailto:hello@byxbytemedia.com"
+      value: "Tanmaynikumbh@byxbytemedia.com",
+      href: "mailto:Tanmaynikumbh@byxbytemedia.com"
     },
     {
       icon: <Phone className="w-5 h-5" />,
       label: "Phone",
-      value: "+1 (555) 123-4567",
-      href: "tel:+15551234567"
+      value: "+91 9359136696",
+      href: "tel:9359136696"
     },
-    {
-      icon: <Calendar className="w-5 h-5" />,
-      label: "Schedule Call",
-      value: "Book a free consultation",
-      href: "#"
-    }
+    // {
+    //   icon: <Calendar className="w-5 h-5" />,
+    //   label: "Schedule Call",
+    //   value: "Book a free consultation",
+    //   href: "#"
+    // }
   ];
 
   const services = [

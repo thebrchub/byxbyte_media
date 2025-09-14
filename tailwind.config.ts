@@ -172,6 +172,7 @@ const config = {
     },
   },
   plugins: [
+    require('tailwind-scrollbar-hide'),
     require("tailwindcss-animate"),
     addVariablesForColors,
     function ({ matchUtilities, theme }: any) {
@@ -198,6 +199,8 @@ const config = {
     },
   ],
 } satisfies Config;
+
+
 
 function addVariablesForColors({ addBase, theme }: any) {
   let allColors = flattenColorPalette(theme("colors"));

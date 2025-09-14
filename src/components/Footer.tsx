@@ -101,7 +101,7 @@ export function Footer() {
             <p className="mb-2">Got a video to edit? A YouTube channel to grow? A campaign to launch? </p>
             <p className="mb-4">Let’s bring your story to life and help it reach the right audience</p>
             <div className="space-y-1">
-            <p><strong>Email:</strong> <a href="mailto:contact@byxbytemedia.com" className="text-orange-400 hover:text-orange-300 transition-colors">contact@byxbytemedia.com</a></p>
+            <p><strong>Email:</strong> <a href="mailto:Tanmaynikumbh@byxbytemedia.com" className="text-orange-400 hover:text-orange-300 transition-colors">Tanmaynikumbh@byxbytemedia.com</a></p>
             <p><strong>Phone:</strong> <a href="tel:+919359136696" className="text-orange-400 hover:text-orange-300 transition-colors">+91 93591 36696</a></p>
             <p><strong>Location:</strong> Mumbai, Maharashtra, India</p>
             </div>

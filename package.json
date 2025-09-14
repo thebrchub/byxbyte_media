@@ -19,6 +19,7 @@
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.5.0",
     "clsx": "^2.1.1",
+    "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^11.2.14",
     "gsap": "^3.12.5",
@@ -36,6 +37,7 @@
     "simplex-noise": "^4.0.1",
     "swiper": "^11.2.10",
     "tailwind-merge": "^2.4.0",
+    "tailwind-scrollbar-hide": "^4.0.0",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.166.1",
     "three-globe": "^2.31.1"

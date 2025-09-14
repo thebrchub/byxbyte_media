@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, CheckCircle } from "lucide-react";
 import dynamic from "next/dynamic";
 import { Service } from "../type/service";
+import CarouselSection from "./CarouselSection";
 
 const ReactCompareImage: any = dynamic(() => import("react-compare-image"), {
   ssr: false,
@@ -206,34 +207,33 @@ export default function ServiceModal({
 
 
             {activeTab === "process" && hasProcess && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="space-y-6"
-              >
-                <h3 className="text-lg sm:text-2xl font-bold text-white">
-                  Our Process
-                </h3>
-                <div className="space-y-4">
-                  {service.process?.map((step, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.2 }}
-                      className="flex items-start p-4 rounded-xl bg-gray-800/40 border border-gray-700/30"
-                    >
-                      <div className="flex-shrink-0 w-6 h-6 sm:w-8 sm:h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xs sm:text-sm mr-3 sm:mr-4">
-                        {index + 1}
-                      </div>
-                      <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
-                        {step}
-                      </p>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            )}
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    className="space-y-10"
+  >
+    <h3 className="text-lg sm:text-2xl font-bold text-white text-center">
+      Our Process
+    </h3>
+
+    {service.process?.map((phase, phaseIndex) => {
+      const steps = phase.steps.map((step, idx) => ({
+        title: step.title,             // ✅ already structured
+        description: step.description, // ✅ use directly
+        image: step.img || `/images/${phase.title.toLowerCase()}-${idx + 1}.jpg`, // fallback
+      }));
+
+      return (
+        <CarouselSection
+          key={phaseIndex}
+          title={phase.title}
+          steps={steps}
+        />
+      );
+    })}
+  </motion.div>
+)}
+
           </div>
 
           {/* Footer */}

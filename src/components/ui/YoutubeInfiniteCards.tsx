@@ -1,6 +1,6 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { Play, X, ExternalLink } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
+import { Play, X, ExternalLink, ChevronLeft, ChevronRight, Pause } from "lucide-react";
 
 // New type for videos
 export interface YoutubeVideo {
@@ -18,6 +18,8 @@ const YoutubeInfiniteCards: React.FC<YoutubeInfiniteCardsProps> = ({
   projectTitle,
 }) => {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  const [isPaused, setIsPaused] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const extractVideoId = (url: string): string | null => {
     const regExp =
@@ -45,13 +47,34 @@ const YoutubeInfiniteCards: React.FC<YoutubeInfiniteCardsProps> = ({
   const openVideoModal = (videoUrl: string) => setSelectedVideo(videoUrl);
   const closeVideoModal = () => setSelectedVideo(null);
 
+  const slideLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -320, behavior: 'smooth' });
+    }
+  };
+
+  const slideRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 320, behavior: 'smooth' });
+    }
+  };
+
+  const togglePlayPause = () => setIsPaused(!isPaused);
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") closeVideoModal();
+      if (event.key === " " && !selectedVideo) {
+        event.preventDefault();
+        togglePlayPause();
+      }
+      if (event.key === "ArrowLeft" && !selectedVideo) slideLeft();
+      if (event.key === "ArrowRight" && !selectedVideo) slideRight();
     };
 
+    document.addEventListener("keydown", handleKeyDown);
+
     if (selectedVideo) {
-      document.addEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "hidden";
     }
 
@@ -64,11 +87,47 @@ const YoutubeInfiniteCards: React.FC<YoutubeInfiniteCardsProps> = ({
   return (
     <>
       <div className="relative overflow-hidden py-8">
-        <h4 className="text-xl font-semibold text-white mb-6 text-center">
-          Video Gallery - {projectTitle}
+        <h4 className="text-3xl font-semibold text-white mb-8 text-center">
+          Video Gallery 
+          {/* - {projectTitle} */}
         </h4>
 
-        <div className="flex animate-scroll-left space-x-6">
+        {/* Manual Controls */}
+        <div className="absolute top-1/2 -translate-y-1/2 left-4 z-20">
+          <button
+            onClick={slideLeft}
+            className="bg-black/50 hover:bg-black/70 backdrop-blur-sm rounded-full p-3 transition-all duration-200 border border-white/20"
+            title="Slide Left"
+          >
+            <ChevronLeft className="w-6 h-6 text-white" />
+          </button>
+        </div>
+
+        <div className="absolute top-1/2 -translate-y-1/2 right-4 z-20">
+          <button
+            onClick={slideRight}
+            className="bg-black/50 hover:bg-black/70 backdrop-blur-sm rounded-full p-3 transition-all duration-200 border border-white/20"
+            title="Slide Right"
+          >
+            <ChevronRight className="w-6 h-6 text-white" />
+          </button>
+        </div>
+
+        {/* Pause/Play Control */}
+        <div className="absolute top-4 right-4 z-20">
+          <button
+            onClick={togglePlayPause}
+            className="bg-black/50 hover:bg-black/70 backdrop-blur-sm rounded-full p-3 transition-all duration-200 border border-white/20"
+            title={isPaused ? "Resume Auto-scroll" : "Pause Auto-scroll"}
+          >
+            {isPaused ? <Play className="w-5 h-5 text-white" fill="white" /> : <Pause className="w-5 h-5 text-white" />}
+          </button>
+        </div>
+
+        <div 
+          ref={scrollContainerRef}
+          className={`flex space-x-6 ${isPaused ? '' : 'animate-scroll-left'} overflow-x-auto scrollbar-hide`}
+        >
           {duplicatedLinks.map((video, index) => {
             const thumbnail = getThumbnail(video.url);
             const videoId = extractVideoId(video.url);
@@ -79,7 +138,7 @@ const YoutubeInfiniteCards: React.FC<YoutubeInfiniteCardsProps> = ({
                 className="flex-shrink-0 w-80 h-48 relative group cursor-pointer transform hover:scale-105 transition-all duration-300"
                 onClick={() => openVideoModal(video.url)}
               >
-                <div className="w-full h-full rounded-xl overflow-hidden bg-gray-900 relative">
+                <div className="w-full h-full rounded-xl overflow-hidden bg-gray-900 relative shadow-lg">
                   {thumbnail && (
                     <img
                       src={thumbnail}
@@ -119,16 +178,16 @@ const YoutubeInfiniteCards: React.FC<YoutubeInfiniteCardsProps> = ({
           })}
         </div>
 
-        {/* Fade edges */}
-        <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-gray-900 to-transparent pointer-events-none z-10" />
-        <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-gray-900 to-transparent pointer-events-none z-10" />
+        {/* Enhanced Fade edges */}
+        <div className="absolute top-0 left-0 w-40 h-full bg-gradient-to-r from-gray-900 via-gray-900/80 to-transparent pointer-events-none z-10" />
+        <div className="absolute top-0 right-0 w-40 h-full bg-gradient-to-l from-gray-900 via-gray-900/80 to-transparent pointer-events-none z-10" />
       </div>
 
       {selectedVideo && (
         <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4">
           <button
             onClick={closeVideoModal}
-            className="absolute top-8 right-8 z-60 bg-white/10 hover:bg-white/20 rounded-full p-3 transition-colors duration-200"
+            className="absolute top-8 right-8 z-60 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full p-3 transition-colors duration-200 border border-white/10"
           >
             <X className="w-6 h-6 text-white" />
           </button>
@@ -162,6 +221,13 @@ const YoutubeInfiniteCards: React.FC<YoutubeInfiniteCardsProps> = ({
         }
         .animate-scroll-left:hover {
           animation-play-state: paused;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
         }
       `}</style>
     </>

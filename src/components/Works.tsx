@@ -4,9 +4,10 @@ import { workItems } from "../data/index";
 import Image from "next/image";
 import { useState } from "react";
 import WorkModal from "../components/ui/WorkModal";
+import AlbumInfiniteCards from "../components/ui/AlbumInfiniteCards";
 import YoutubeInfiniteCards from "../components/ui/YoutubeInfiniteCards";
 import { WorkItem } from "../components/type/work";
-
+import { motion } from "framer-motion";
 
 
 type Album = {
@@ -59,52 +60,69 @@ export default function Works() {
       id="projects"
       className="relative flex flex-col w-full h-full bg-gradient-to-b from-black via-gray-900 to-black py-20"
     >
-      <div className="container">
-        <h3 className="text-xl text-white z-50 pb-5">Our Works</h3>
+      {/* Works Header + Category Filter */}
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+      className="text-center mb-16 container"
+    >
+      {/* Gradient Title */}
+      <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+        Our Works
+      </h2>
 
-        {/* Category Filter */}
-        <div className="flex gap-4 mb-10 flex-wrap">
-          <button
-            onClick={() => setSelectedCategory("all")}
-            className={`px-6 py-2 rounded-full border transition-colors ${
-              selectedCategory === "all"
-                ? "border-white bg-white text-black"
-                : "border-gray-600 text-gray-300 hover:border-gray-400"
-            }`}
-          >
-            All Projects ({workItems.length} • {totalAlbums} albums)
-          </button>
+      {/* Underline */}
+      <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-8 rounded-full"></div>
 
-          <button
-            onClick={() => setSelectedCategory("Advertisement")}
-            className={`px-6 py-2 rounded-full border transition-colors ${
-              selectedCategory === "Advertisement"
-                ? "border-white bg-white text-black"
-                : "border-gray-600 text-gray-300 hover:border-gray-400"
-            }`}
-          >
-            Advertisements (
-            {workItems.filter((item) => item.category === "Advertisement").length} • {adAlbums} albums)
-          </button>
+      {/* Subtitle */}
+      <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-12">
+        A showcase of our best Ad Films, Music Videos & Corporate projects —
+        crafted with creativity and precision.
+      </p>
 
-          <button
-            onClick={() => setSelectedCategory("Music Video")}
-            className={`px-6 py-2 rounded-full border transition-colors ${
-              selectedCategory === "Music Video"
-                ? "border-white bg-white text-black"
-                : "border-gray-600 text-gray-300 hover:border-gray-400"
-            }`}
-          >
-            Music Videos (
-            {workItems.filter((item) => item.category === "Music Video").length} • {musicAlbums} albums)
-          </button>
+      {/* Category Filter */}
+      <div className="flex gap-4 mb-10 flex-wrap justify-center">
+        <button
+          onClick={() => setSelectedCategory("all")}
+          className={`px-6 py-2 rounded-full border transition-colors ${
+            selectedCategory === "all"
+              ? "border-white bg-white text-black"
+              : "border-gray-600 text-gray-300 hover:border-gray-400"
+          }`}
+        >
+          All Projects ({workItems.length} • {totalAlbums} albums)
+        </button>
 
-          {/* 🚀 Future filter buttons
-          <button>Documentaries</button>
-          <button>E-commerce</button>
-          */}
-        </div>
+        <button
+          onClick={() => setSelectedCategory("Advertisement")}
+          className={`px-6 py-2 rounded-full border transition-colors ${
+            selectedCategory === "Advertisement"
+              ? "border-white bg-white text-black"
+              : "border-gray-600 text-gray-300 hover:border-gray-400"
+          }`}
+        >
+          Advertisements (
+          {workItems.filter((item) => item.category === "Advertisement").length} •{" "}
+          {adAlbums} albums)
+        </button>
+
+        <button
+          onClick={() => setSelectedCategory("Music Video")}
+          className={`px-6 py-2 rounded-full border transition-colors ${
+            selectedCategory === "Music Video"
+              ? "border-white bg-white text-black"
+              : "border-gray-600 text-gray-300 hover:border-gray-400"
+          }`}
+        >
+          Music Videos (
+          {workItems.filter((item) => item.category === "Music Video").length} •{" "}
+          {musicAlbums} albums)
+        </button>
       </div>
+    </motion.div>
+
 
       {filteredItems.map((item, index) => (
         <div key={item.id} className="container mb-20">
@@ -191,27 +209,7 @@ export default function Works() {
               </div>
 
               {item.albums?.length > 0 && (
-                <div className="grid grid-cols-4 gap-3">
-                  {item.albums.slice(0, 4).map((album, albumIndex) => (
-                    <div key={albumIndex} className="group/album">
-                      <div className="aspect-square rounded-xl overflow-hidden bg-gray-800 relative">
-                        <Image
-                          src={album.cover}
-                          alt={album.title}
-                          fill
-                          className="object-cover group-hover/album:scale-110 transition-transform duration-300"
-                          loading="lazy"
-                          quality={60}
-                        />
-                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/album:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                          <span className="text-white text-xs font-medium text-center px-2">
-                            {album.title}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <AlbumInfiniteCards albums={item.albums} />
               )}
 
               {item.albums.length > 4 && (

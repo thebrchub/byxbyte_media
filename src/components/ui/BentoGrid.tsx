@@ -64,14 +64,26 @@ const InfiniteScrollMedia = ({
         {media.map((item, idx) => (
           <div
             key={`first-${idx}`}
-            className={cn("flex-shrink-0", direction === "horizontal" ? "w-80 h-full mr-4" : "w-full h-80 mb-4")}
+            className="flex-shrink-0 w-full h-full mr-4"
           >
             {item.type === "video" ? (
-              <video src={item.src} autoPlay muted loop playsInline className="w-full h-full object-cover rounded-lg" />
+              <video
+                src={item.src}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover rounded-lg"
+              />
             ) : (
-              <img src={item.src} alt={item.alt || "media"} className="w-full h-full object-cover rounded-lg" />
+              <img
+                src={item.src}
+                alt={item.alt || "media"}
+                className="w-full h-full object-cover rounded-lg"
+              />
             )}
           </div>
+
         ))}
 
         {/* duplicate for seamless loop */}

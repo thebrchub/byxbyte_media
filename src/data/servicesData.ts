@@ -2,55 +2,54 @@
 import { Video, Palette, Edit3, FileText, Clapperboard, Play } from 'lucide-react';
 import { Service } from "../components/type/service";
 
+/* ---------- Work Items ---------- */
 export interface ServiceItem {
   name: string;
   title?: string;
   img: string;
 }
 
-
-
-// Sample work data for moving cards
 export const videoProductionWorks: ServiceItem[] = [
-  { name: "Commercial01", title: "", img: "/works/works01.jpg" },
-  { name: "Commercial02", title: "", img: "/works/video02.jpg" },
-  { name: "Commercial03", title: "", img: "/works/video03.jpg" },
-  { name: "Commercial04", title: "", img: "/works/video04.jpg" },
-  { name: "Commercial05", title: "", img: "/works/video05.jpg" },
+  { name: "Commercial01", title: "", img: "/works/works01.png" },
+  { name: "Commercial02", title: "", img: "/works/works02.png" },
+  { name: "Commercial03", title: "", img: "/works/works03.png" },
+  { name: "Commercial04", title: "", img: "/works/works04.png" },
+  { name: "Commercial05", title: "", img: "/works/works05.png" },
 ];
 
 export const colorGradingWorks: ServiceItem[] = [
-  { name: "Grade01", title: "", img: "/works/grade01.jpg" },
-  { name: "Grade02", title: "", img: "/works/grade02.jpg" },
-  { name: "Grade03", title: "", img: "/works/grade03.jpg" },
-  { name: "Grade04", title: "", img: "/works/grade04.jpg" },
+  { name: "Grade01", title: "", img: "/works/grade01.png" },
+  { name: "Grade02", title: "", img: "/works/grade02.png" },
+  { name: "Grade03", title: "", img: "/works/grade03.png" },
+  { name: "Grade04", title: "", img: "/works/grade04.png" },
 ];
 
 export const postProductionWorks: ServiceItem[] = [
-  { name: "Post01", title: "", img: "/works/post01.jpg" },
-  { name: "Post02", title: "", img: "/works/post02.jpg" },
-  { name: "Post03", title: "", img: "/works/post03.jpg" },
+  { name: "Post01", title: "", img: "/works/post01.png" },
+  { name: "Post02", title: "", img: "/works/post02.png" },
+  { name: "Post03", title: "", img: "/works/post03.png" },
 ];
 
 export const scriptWritingWorks: ServiceItem[] = [
-  { name: "Script01", title: "", img: "/works/script01.jpg" },
-  { name: "Script02", title: "", img: "/works/script02.jpg" },
-  { name: "Script03", title: "", img: "/works/script03.jpg" },
+  { name: "Script01", title: "", img: "/works/script01.png" },
+  // { name: "Script02", title: "", img: "/works/script02.png" },
+  // { name: "Script03", title: "", img: "/works/script03.png" },
 ];
 
 export const storyboardingWorks: ServiceItem[] = [
-  { name: "Storyboard01", title: "", img: "/works/story01.jpg" },
-  { name: "Storyboard02", title: "", img: "/works/story02.jpg" },
-  { name: "Storyboard03", title: "", img: "/works/story03.jpg" },
+  { name: "Storyboard01", title: "", img: "/works/story01.png" },
+  { name: "Storyboard02", title: "", img: "/works/story02.png" },
+  { name: "Storyboard03", title: "", img: "/works/story03.png" },
+  { name: "Storyboard04", title: "", img: "/works/story04.png" },
 ];
 
+/* ---------- Services Data ---------- */
 export const servicesData: Service[] = [
   {
     id: 1,
     title: "Video Production",
     description: "From concept to completion, we create compelling visual stories that captivate your audience",
     detailedDescription: "Our comprehensive video production service covers every aspect of creating professional, engaging content. From initial concept development to final delivery, we ensure your vision comes to life with the highest production values.",
-    // icon: Video,
     features: [
       "Concept Development & Pre-Production Planning",
       "Professional Cinematography & Lighting",
@@ -60,28 +59,91 @@ export const servicesData: Service[] = [
       "High-End Equipment & Technology"
     ],
     process: [
-      "Pre-Production: Concept, scripting, storyboarding, planning",
-      "Production: Filming, directing, cinematography, sound recording",
-      "Post-Production: Editing, color grading, sound design, delivery"
+      {
+        title: "Pre-Production",
+        steps: [
+  {
+    title: "Script Writing",
+    description: "Our experienced scriptwriters craft compelling scripts...",
+    img: "/works/steps/script01.png"
+  },
+  {
+    title: "Storyboarding",
+    description: "Visual storyboards to outline shots, angles, key elements...",
+    img: "/works/steps/script02.png"
+  }
+],
+
+      },
+      {
+        title: "Production",
+        steps: [
+          {
+            title: "Filming",
+            description: "High-quality footage with professional cameras and crew",
+            img: "/works/steps/production-1.jpg",
+          },
+          {
+            title: "Lighting Setup",
+            description: "Professional techniques for mood and clarity",
+            img: "/works/steps/production-2.jpg",
+          },
+          {
+            title: "Audio Recording",
+            description: "Clear dialogue, ambient sound, and effects",
+            img: "/works/steps/production-3.jpg",
+          },
+          {
+            title: "Direction",
+            description: "Guiding talent to deliver authentic performances",
+            img: "/works/steps/production-4.jpg",
+          },
+        ],
+      },
+  {
+    title: "Post-Production",
+    steps: [
+      {
+        title: "Video Editing",
+        description: "Seamless transitions, VFX, motion graphics",
+        img: "/works/steps/postproduction-1.jpg",
+      },
+      {
+        title: "Color Grading",
+        description: "Create mood and align with brand identity",
+        img: "/works/steps/postproduction-2.png",
+      },
+      {
+        title: "Sound Design & Mixing",
+        description: "Enhance audio with music, VO, effects",
+        img: "/works/steps/postproduction-3.jpg",
+      },
+      {
+        title: "Final Delivery",
+        description: "Optimized formats for TV, web, and social media",
+        img: "/works/steps/postproduction-4.jpg",
+      },
+    ],
+  },
+
     ],
     gallery: [
       "/api/placeholder/600/400",
       "/api/placeholder/600/400",
       "/api/placeholder/600/400",
-      "/api/placeholder/600/400"
     ],
     className: "md:col-span-4 lg:col-span-2 row-span-1 h-64",
     titleClassName: "justify-start items-start text-white",
     descriptionClassName: "text-gray-300",
-    img: "/works/works01.jpg",
-    imgClassName: "w-full h-full opacity-30",
+    img: "/works/works01.png",
+    imgClassName: "w-full h-full object-cover opacity-30",
+    spareImg: "/works/works02.jpg", // ✅ added alternate
   },
   {
     id: 2,
     title: "Color Grading & DI",
     description: "Transform your footage with professional color grading and digital intermediate services",
     detailedDescription: "Our color grading and Digital Intermediate (DI) services enhance the visual impact of your content. Using industry-standard tools and techniques, we create the perfect mood, atmosphere, and visual consistency for your project.",
-    // icon: Palette,
     features: [
       "Professional Color Correction & Grading",
       "LUT Creation & Application",
@@ -91,10 +153,18 @@ export const servicesData: Service[] = [
       "Technical Quality Control"
     ],
     beforeAfterPairs: [
-      { before: "/works/grade01-before.jpg", after: "/works/grade01-after.jpg" },
-      { before: "/works/grade02-before.jpg", after: "/works/grade02-after.jpg" },
-      { before: "/works/grade03-before.jpg", after: "/works/grade03-after.jpg" },
-      { before: "/works/grade04-before.jpg", after: "/works/grade04-after.jpg" }
+      { before: "/works/colorgrading/grade01-before.png", after: "/works/colorgrading/grade01-after.png" },
+      { before: "/works/colorgrading/grade02-before.png", after: "/works/colorgrading/grade02-after.png" },
+      { before: "/works/colorgrading/grade03-before.png", after: "/works/colorgrading/grade03-after.png" },
+      { before: "/works/colorgrading/grade04-before.png", after: "/works/colorgrading/grade04-after.png" },
+      { before: "/works/colorgrading/grade05-before.png", after: "/works/colorgrading/grade05-after.png" },
+      { before: "/works/colorgrading/grade06-before.png", after: "/works/colorgrading/grade06-after.png" },
+      { before: "/works/colorgrading/grade07-before.png", after: "/works/colorgrading/grade07-after.png" },
+      { before: "/works/colorgrading/grade08-before.png", after: "/works/colorgrading/grade08-after.png" },
+      { before: "/works/colorgrading/grade09-before.png", after: "/works/colorgrading/grade09-after.png" },
+      { before: "/works/colorgrading/grade10-before.png", after: "/works/colorgrading/grade10-after.png" },
+      { before: "/works/colorgrading/grade11-before.png", after: "/works/colorgrading/grade11-after.png" },
+      { before: "/works/colorgrading/grade12-before.png", after: "/works/colorgrading/grade12-after.png" },
     ],
     className: "md:col-span-4 lg:col-span-2 row-span-1 h-64",
     titleClassName: "justify-start items-start text-white",
@@ -102,13 +172,11 @@ export const servicesData: Service[] = [
     img: "/works/works02.jpg",
     imgClassName: "w-full h-full opacity-40",
   },
-
   {
     id: 3,
     title: "Post Production",
     description: "Complete post-production services to bring your vision to life",
     detailedDescription: "Our post-production services encompass the entire workflow from raw footage to final delivery. We handle editing, sound design, visual effects, and all technical aspects to ensure your content meets professional standards.",
-    // icon: Edit3,
     features: [
       "Video Editing & Assembly",
       "Sound Design & Audio Mixing",
@@ -118,27 +186,87 @@ export const servicesData: Service[] = [
       "Quality Control & Review"
     ],
     process: [
-      "Pre-Production: Script analysis, asset organization, workflow planning",
-      "Production: Editing, sound design, VFX, color correction",
-      "Post-Production: Final review, mastering, delivery in multiple formats"
+      {
+        title: "Pre-Production",
+        steps: [
+  {
+    title: "Script Writing",
+    description: "Our experienced scriptwriters craft compelling scripts...",
+    img: "/works/steps/script01.png"
+  },
+  {
+    title: "Storyboarding",
+    description: "Visual storyboards to outline shots, angles, key elements...",
+    img: "/works/steps/script02.png"
+  }
+],
+
+      },
+      {
+        title: "Production",
+        steps: [
+          {
+            title: "Filming",
+            description: "High-quality footage with professional cameras and crew",
+            img: "/works/steps/production-1.jpg",
+          },
+          {
+            title: "Lighting Setup",
+            description: "Professional techniques for mood and clarity",
+            img: "/works/steps/production-2.jpg",
+          },
+          {
+            title: "Audio Recording",
+            description: "Clear dialogue, ambient sound, and effects",
+            img: "/works/steps/production-3.jpg",
+          },
+          {
+            title: "Direction",
+            description: "Guiding talent to deliver authentic performances",
+            img: "/works/steps/production-4.jpg",
+          },
+        ],
+      },
+  {
+    title: "Post-Production",
+    steps: [
+      {
+        title: "Video Editing",
+        description: "Seamless transitions, VFX, motion graphics",
+        img: "/works/steps/postproduction-1.jpg",
+      },
+      {
+        title: "Color Grading",
+        description: "Create mood and align with brand identity",
+        img: "/works/steps/postproduction-2.png",
+      },
+      {
+        title: "Sound Design & Mixing",
+        description: "Enhance audio with music, VO, effects",
+        img: "/works/steps/postproduction-3.jpg",
+      },
+      {
+        title: "Final Delivery",
+        description: "Optimized formats for TV, web, and social media",
+        img: "/works/steps/postproduction-4.jpg",
+      },
     ],
-    gallery: [
-      "/api/placeholder/600/400",
-      "/api/placeholder/600/400",
-      "/api/placeholder/600/400"
+  },
+
     ],
+    gallery: ["/api/placeholder/600/400", "/api/placeholder/600/400"],
     className: "md:col-span-2 lg:col-span-1 row-span-2 h-96 md:h-[32rem]",
     titleClassName: "justify-start items-start text-white",
     descriptionClassName: "text-gray-300",
     img: "/works/works03.jpg",
     imgClassName: "w-full h-full opacity-30",
+    spareImg: "/works/post02.jpg", // ✅ added alternate
   },
   {
     id: 4,
     title: "Script Writing",
     description: "Craft compelling narratives that engage and inspire",
-    detailedDescription: "Professional scriptwriting services that transform ideas into compelling narratives. We create scripts that not only tell your story effectively but also consider production requirements and target audience engagement.",
-    // icon: FileText,
+    detailedDescription: "Professional scriptwriting services that transform ideas into compelling narratives...",
     features: [
       "Original Script Development",
       "Adaptation & Rewrites",
@@ -155,20 +283,16 @@ export const servicesData: Service[] = [
     id: 5,
     title: "Storyboarding",
     description: "Visualize your story before production begins",
-    detailedDescription: "Professional storyboarding services that help visualize your project before filming begins. Our detailed storyboards ensure efficient production planning and clear communication of creative vision.",
-    // icon: Clapperboard,
+    detailedDescription: "Professional storyboarding services that help visualize your project before filming begins...",
     features: [
       "Detailed Scene Visualization",
-      "Camera Angle Planning", 
+      "Camera Angle Planning",
       "Shot Composition",
       "Timing & Pacing",
       "Technical Annotations",
       "Digital & Traditional Methods"
     ],
-    gallery: [
-      "/api/placeholder/600/400",
-      "/api/placeholder/600/400"
-    ],
+    gallery: ["/api/placeholder/600/400", "/api/placeholder/600/400"],
     className: "md:col-span-2 lg:col-span-1 row-span-1 h-64",
     titleClassName: "justify-start items-start text-white text-xl",
     descriptionClassName: "text-gray-300 text-sm",
@@ -178,10 +302,9 @@ export const servicesData: Service[] = [
     title: "Let's Create Something Amazing",
     description: "Ready to bring your vision to life? Get in touch with us today.",
     detailedDescription: "",
-    // icon: Play,
     features: [],
     className: "md:col-span-6 lg:col-span-4 row-span-1 h-48",
     titleClassName: "flex justify-center items-center text-white text-xl text-center",
-    descriptionClassName: "text-gray-300 text-sm text-center"
+    descriptionClassName: "text-gray-300 text-sm text-center",
   },
 ];

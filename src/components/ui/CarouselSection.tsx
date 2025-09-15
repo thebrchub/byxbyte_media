@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useRef } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import Image from 'next/image';
@@ -42,16 +42,16 @@ const CarouselSection: React.FC<CarouselSectionProps> = ({ title, steps }) => {
           <div className="flex">
             {steps.map((step, idx) => (
               <div
-  className="flex-[0_0_100%] md:flex-[0_0_70%] lg:flex-[0_0_50%] px-6"
-  key={idx}
->
-
-                <div className="relative rounded-2xl overflow-hidden shadow-lg group">
+                className="flex-[0_0_100%] md:flex-[0_0_70%] lg:flex-[0_0_50%] px-6"
+                key={idx}
+              >
+                <div className="relative rounded-2xl overflow-hidden shadow-lg group h-64 md:h-80 lg:h-96">
                   {/* Image */}
                   <Image
                     src={step.image}
                     alt={step.title}
-                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
 
                   {/* Overlay */}

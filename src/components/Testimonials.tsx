@@ -8,7 +8,7 @@ const logos = [
   { id: 3, name: "Client3", img: "/logos/3.png" },
   { id: 4, name: "Client4", img: "/logos/4.png" },
   { id: 5, name: "Client5", img: "/logos/5.png" },
-  { id: 6, name: "Client6", img: "/logos/6.png" },
+  { id: 6, name: "Client6", img: "/logos/15.png" },
   { id: 7, name: "Client7", img: "/logos/7.png" },
   { id: 8, name: "Client8", img: "/logos/8.png" },
   { id: 9, name: "Client9", img: "/logos/9.png" },

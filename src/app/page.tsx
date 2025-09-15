@@ -41,11 +41,15 @@ function ServicesPreview() {
         </motion.div>
       ))}
       <motion.div
-        className="mt-16 text-center col-span-full"
-        variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-        transition={{ duration: 0.6, delay: 0.3 }}
+        className="mt-16 text-center col-span-full inline-block"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ type: "spring", stiffness: 300 }}
       >
-        <Link href="/Service" className="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-900 font-semibold rounded-2xl shadow-lg hover:shadow-xl hover:bg-gray-100 transition-all group">
+        <Link
+          href="/Service"
+          className="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-900 font-semibold rounded-2xl shadow-lg hover:shadow-xl hover:bg-gray-100 transition-all group"
+        >
           View All Services
           <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
         </Link>
@@ -88,15 +92,20 @@ function WorksPreview() {
         </motion.div>
       ))}
       <motion.div
-        className="mt-16 text-center col-span-full"
-        variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-        transition={{ duration: 0.6, delay: 0.3 }}
+        className="mt-16 text-center col-span-full inline-block"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ type: "spring", stiffness: 300 }}
       >
-        <Link href="/Work" className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-gray-800 to-gray-700 border border-gray-600/40 text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all group">
+        <Link
+          href="/Work"
+          className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-gray-800 to-gray-700 text-white font-semibold rounded-2xl border border-gray-600/40 shadow-lg hover:shadow-xl transition-all group"
+        >
           View More Works
           <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
         </Link>
       </motion.div>
+
     </motion.div>
   );
 }
@@ -105,7 +114,7 @@ function WorksPreview() {
 function AboutSection() {
   return (
     <motion.section
-      className="py-32 min-h-screen max-w-6xl mx-auto px-6 text-center"
+      className="py-32 max-w-6xl mx-auto px-6 text-center"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -158,13 +167,13 @@ function CTASection() {
 /* ------------------ Main ------------------ */
 export default function Home() {
   return (
-    <main className="flex flex-col min-h-screen overflow-y-scroll overflow-x-hidden bg-black bg-grid-white/[0.02] text-white relative">
-      {/* Decorative blur backgrounds */}
+    <main className="flex flex-col min-h-screen overflow-x-hidden bg-black bg-grid-white/[0.02] text-white relative overflow-hidden">
+      {/* Fixed decorative blurs */}
       <div className="fixed top-1/4 left-1/4 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl pointer-events-none"></div>
       <div className="fixed bottom-1/4 right-1/4 w-72 h-72 bg-purple-500/5 rounded-full blur-3xl pointer-events-none"></div>
 
-      {/* Full-height wrapper to fix scroll glitch */}
-      <div className="min-h-screen flex flex-col relative z-10">
+      {/* Scrollable content */}
+      <div className="flex-1 overflow-y-auto custom-scrollbar z-10 flex flex-col">
         <Header />
         <Hero />
         <AboutSection />
@@ -185,6 +194,7 @@ export default function Home() {
 
         <Testimonials />
         <CTASection />
+        
       </div>
     </main>
   );

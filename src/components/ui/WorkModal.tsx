@@ -37,7 +37,7 @@ export default function WorkModal({ work, onClose }: WorkModalProps) {
   const availableTabs = [
     { key: "overview", label: "Overview", show: true },
     { key: "images", label: "Images", show: !!work.albums?.length },
-    { key: "videos", label: "Videos", show: !!work.youtubeLinks?.length },
+    // { key: "videos", label: "Videos", show: !!work.youtubeLinks?.length },
   ].filter((tab) => tab.show);
 
   const [activeTab, setActiveTab] = useState<string>(availableTabs[0].key);

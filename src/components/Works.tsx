@@ -127,8 +127,8 @@ export default function Works() {
                     {[
                       ["Type", item.tag],
                       ["Albums", `${item.albums.length} projects`],
-                      ["Videos", `${item.youtubeLinks.length} videos`],
-                      ...(item.beforeAfterPairs ? [["Process", `${item.beforeAfterPairs.length} before/after pairs`]] : []),
+                      // ["Videos", `${item.youtubeLinks.length} videos`],
+                      // ...(item.beforeAfterPairs ? [["Process", `${item.beforeAfterPairs.length} before/after pairs`]] : []),
                     ].map(([label, value]) => (
                       <div key={label} className="flex flex-col sm:flex-row justify-between border-b border-gray-700 py-2">
                         <span className="text-gray-400 text-sm sm:w-1/3">{label}:</span>

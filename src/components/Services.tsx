@@ -5,6 +5,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { BentoGrid, BentoGridItem } from "./ui/BentoGrid";
 import { Service } from "../components/type/service";
+import { useRouter } from "next/navigation";
 import ServiceModal from "./ui/ServiceModal";
 
 import { 
@@ -73,13 +74,12 @@ export default function Services() {
     }
   };
 
+  const router = useRouter();
+
   const handleServiceClick = (service: Service) => {
     if (service.id === 6) {
-      // Scroll to contact section
-      const contactEl = document.getElementById("contact");
-      if (contactEl) {
-        contactEl.scrollIntoView({ behavior: "smooth" });
-      }
+      // Redirect to Contact page
+      router.push("/Contact"); 
     } else {
       setSelectedService(service);
     }
@@ -110,7 +110,7 @@ export default function Services() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 mt-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
             Our Services
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-8 rounded-full"></div>

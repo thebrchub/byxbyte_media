@@ -1,4 +1,5 @@
 'use client'
+import Link from "next/link";
 import { useEffect } from "react";
 import { gsap } from "gsap";
 
@@ -26,20 +27,22 @@ export default function HeroContent() {
                 raw footage into content that performs.
             </p>
             <div className="flex flex-wrap justify-center items-center gap-4 mt-6 z-20">
-            <button
-                type="button"
-                className="hero-button text-sm px-4 py-2 bg-white text-black rounded-full text-center creativeBtn"
-                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-                <span>View Portfolio</span>
-            </button>
-            <button
-                type="button"
-                className="hero-button text-sm px-4 py-2 bg-white text-black rounded-full text-center creativeBtn"
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-                <span>Grow Your Channel</span>
-            </button>
+                <Link href="/Work">
+                    <button
+                        type="button"
+                        className="hero-button text-sm px-4 py-2 bg-white text-black rounded-full text-center creativeBtn"
+                    >
+                        <span>View Portfolio</span>
+                    </button>
+                </Link>
+                <Link href="/Contact">
+                    <button
+                        type="button"
+                        className="hero-button text-sm px-4 py-2 bg-white text-black rounded-full text-center creativeBtn"
+                    >
+                        <span>Grow Your Channel</span>
+                    </button>
+                </Link>
             </div>
         </div>
     )

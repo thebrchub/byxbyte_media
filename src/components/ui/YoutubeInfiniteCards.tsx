@@ -1,9 +1,8 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import { Play, X, ExternalLink, ChevronLeft, ChevronRight, Pause } from "lucide-react";
-import Image from 'next/image';
+import { Play, X, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
-// New type for videos
 export interface YoutubeVideo {
   url: string;
   title: string;
@@ -20,217 +19,187 @@ const YoutubeInfiniteCards: React.FC<YoutubeInfiniteCardsProps> = ({
 }) => {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
   const [isPaused, setIsPaused] = useState(false);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+  const animationFrameRef = useRef<number | null>(null);
+  let resumeTimeout: NodeJS.Timeout | null = null;
 
-  const extractVideoId = (url: string): string | null => {
+  const extractVideoId = (url: string) => {
     const regExp =
       /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = url.match(regExp);
     return match && match[2].length === 11 ? match[2] : null;
   };
 
-  const getThumbnail = (url: string): string | null => {
+  const getThumbnail = (url: string) => {
     const videoId = extractVideoId(url);
     return videoId
       ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
       : null;
   };
 
-  const getEmbedUrl = (url: string): string => {
+  const getEmbedUrl = (url: string) => {
     const videoId = extractVideoId(url);
     return videoId
       ? `https://www.youtube.com/embed/${videoId}?autoplay=1`
       : url;
   };
 
-  const duplicatedLinks = [...youtubeLinks, ...youtubeLinks, ...youtubeLinks];
+  const duplicatedLinks = [...youtubeLinks, ...youtubeLinks];
 
   const openVideoModal = (videoUrl: string) => setSelectedVideo(videoUrl);
   const closeVideoModal = () => setSelectedVideo(null);
 
-  const slideLeft = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: -320, behavior: 'smooth' });
-    }
+  // Manual scroll with pause/resume
+  const scrollByAmount = (amount: number) => {
+    if (!scrollContainerRef.current) return;
+
+    setIsPaused(true);
+    scrollContainerRef.current.scrollBy({ left: amount, behavior: "smooth" });
+
+    if (resumeTimeout) clearTimeout(resumeTimeout);
+    resumeTimeout = setTimeout(() => {
+      setIsPaused(false);
+    }, 3000);
   };
 
-  const slideRight = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: 320, behavior: 'smooth' });
-    }
-  };
+  const slideLeft = () => scrollByAmount(-320); // one card
+  const slideRight = () => scrollByAmount(320);
 
-  const togglePlayPause = () => setIsPaused(!isPaused);
-
+  // --- Auto scroll logic ---
   useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") closeVideoModal();
-      if (event.key === " " && !selectedVideo) {
-        event.preventDefault();
-        togglePlayPause();
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const speed = 0.5; // pixels per frame
+    let lastTime = performance.now();
+
+    const step = (time: number) => {
+      if (!isPaused) {
+        const delta = time - lastTime;
+        lastTime = time;
+        container.scrollLeft += speed * (delta / 16.67);
+
+        // Reset when reaching half
+        if (container.scrollLeft >= container.scrollWidth / 2) {
+          container.scrollLeft = 0;
+        }
+      } else {
+        lastTime = time; // reset timer to avoid jump
       }
-      if (event.key === "ArrowLeft" && !selectedVideo) slideLeft();
-      if (event.key === "ArrowRight" && !selectedVideo) slideRight();
+
+      animationFrameRef.current = requestAnimationFrame(step);
     };
 
-    document.addEventListener("keydown", handleKeyDown);
-
-    if (selectedVideo) {
-      document.body.style.overflow = "hidden";
-    }
+    animationFrameRef.current = requestAnimationFrame(step);
 
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "unset";
+      if (animationFrameRef.current)
+        cancelAnimationFrame(animationFrameRef.current);
     };
-  }, [selectedVideo]);
+  }, [isPaused, youtubeLinks]);
 
   return (
     <>
-      <div className="relative overflow-hidden py-8">
-        <h4 className="text-3xl font-semibold text-white mb-8 text-center">
-          Video Gallery 
-          {/* - {projectTitle} */}
-        </h4>
-
-        {/* Manual Controls */}
-        <div className="absolute top-1/2 -translate-y-1/2 left-4 z-20">
-          <button
-            onClick={slideLeft}
-            className="bg-black/50 hover:bg-black/70 backdrop-blur-sm rounded-full p-3 transition-all duration-200 border border-white/20"
-            title="Slide Left"
-          >
-            <ChevronLeft className="w-6 h-6 text-white" />
-          </button>
+      <div className="relative py-12 px-4 sm:px-12 lg:px-20">
+        {/* Title */}
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight">
+            Video Gallery
+          </h2>
+          <div className="w-20 sm:w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full" />
         </div>
 
-        <div className="absolute top-1/2 -translate-y-1/2 right-4 z-20">
-          <button
-            onClick={slideRight}
-            className="bg-black/50 hover:bg-black/70 backdrop-blur-sm rounded-full p-3 transition-all duration-200 border border-white/20"
-            title="Slide Right"
-          >
-            <ChevronRight className="w-6 h-6 text-white" />
-          </button>
-        </div>
-
-        {/* Pause/Play Control */}
-        <div className="absolute top-4 right-4 z-20">
-          <button
-            onClick={togglePlayPause}
-            className="bg-black/50 hover:bg-black/70 backdrop-blur-sm rounded-full p-3 transition-all duration-200 border border-white/20"
-            title={isPaused ? "Resume Auto-scroll" : "Pause Auto-scroll"}
-          >
-            {isPaused ? <Play className="w-5 h-5 text-white" fill="white" /> : <Pause className="w-5 h-5 text-white" />}
-          </button>
-        </div>
-
-        <div 
-          ref={scrollContainerRef}
-          className={`flex space-x-6 ${isPaused ? '' : 'animate-scroll-left'} overflow-x-auto scrollbar-hide`}
+        {/* Arrow Controls */}
+        <button
+          onClick={slideLeft}
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-40 bg-white/10 hover:bg-white/20 backdrop-blur-xl rounded-full p-3 sm:p-4 transition-all duration-300 border border-white/20 hover:border-white/30 shadow-2xl hover:shadow-white/10 transform hover:scale-110"
+          title="Previous videos"
         >
-          {duplicatedLinks.map((video, index) => {
-            const thumbnail = getThumbnail(video.url);
-            const videoId = extractVideoId(video.url);
+          <ChevronLeft className="w-5 sm:w-6 h-5 sm:h-6 text-white" />
+        </button>
+        <button
+          onClick={slideRight}
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-40 bg-white/10 hover:bg-white/20 backdrop-blur-xl rounded-full p-3 sm:p-4 transition-all duration-300 border border-white/20 hover:border-white/30 shadow-2xl hover:shadow-white/10 transform hover:scale-110"
+          title="Next videos"
+        >
+          <ChevronRight className="w-5 sm:w-6 h-5 sm:h-6 text-white" />
+        </button>
 
-            return (
-              <div
-                key={`${videoId ?? "video"}-${index}`}
-                className="flex-shrink-0 w-80 h-48 relative group cursor-pointer transform hover:scale-105 transition-all duration-300"
-                onClick={() => openVideoModal(video.url)}
-              >
-                <div className="w-full h-full rounded-xl overflow-hidden bg-gray-900 relative shadow-lg">
-                  {thumbnail && (
-                    <Image
-                      src={thumbnail}
-                      alt={video.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      loading="lazy"
-                    />
-                  )}
-
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-
-                  {/* Video title strip at bottom */}
-                  <div className="absolute bottom-0 left-0 w-full bg-black/60 text-white px-3 py-1 text-sm truncate">
-                    {video.title}
-                  </div>
-
-                  {/* Play button overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center group-hover:bg-red-500 transition-colors duration-300 shadow-lg">
-                      <Play className="w-6 h-6 text-white ml-1" fill="white" />
+        {/* Video Cards */}
+        <div className="relative overflow-hidden rounded-2xl">
+          <div
+            ref={scrollContainerRef}
+            className="flex gap-6 sm:gap-8 py-8 overflow-x-scroll scrollbar-hide"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            {duplicatedLinks.map((video, index) => {
+              const thumbnail = getThumbnail(video.url);
+              const videoId = extractVideoId(video.url);
+              return (
+                <div
+                  key={`${videoId ?? "video"}-${index}`}
+                  className="flex-shrink-0 w-56 h-40 sm:w-72 sm:h-52 md:w-96 md:h-60 relative group cursor-pointer transform transition-all duration-500 ease-out hover:scale-105 hover:-translate-y-2"
+                  onClick={() => openVideoModal(video.url)}
+                >
+                  <div className="w-full h-full rounded-2xl overflow-hidden bg-slate-800 relative shadow-xl hover:shadow-2xl transition-all duration-500 ring-1 ring-white/10 hover:ring-white/20">
+                    {thumbnail && (
+                      <Image
+                        src={thumbnail}
+                        alt={video.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        loading="lazy"
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-300" />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-12 sm:w-16 md:w-20 h-12 sm:h-16 md:h-20 bg-red-600 hover:bg-red-500 rounded-full flex items-center justify-center transition-all duration-300 shadow-2xl hover:shadow-red-500/30 transform group-hover:scale-110 ring-2 sm:ring-4 ring-white/20 group-hover:ring-white/30">
+                        <Play
+                          className="w-5 sm:w-7 md:w-8 h-5 sm:h-7 md:h-8 text-white ml-1"
+                          fill="white"
+                        />
+                      </div>
+                    </div>
+                    <div className="absolute bottom-3 left-3 text-white font-semibold text-sm sm:text-base md:text-lg line-clamp-2 drop-shadow-lg">
+                      {video.title}
                     </div>
                   </div>
-
-                  {/* Video number */}
-                  <div className="absolute top-4 left-4 bg-black/60 text-white px-3 py-1 rounded-full text-sm font-medium">
-                    #{index + 1}
-                  </div>
-
-                  {/* External link icon */}
-                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <ExternalLink className="w-5 h-5 text-white" />
-                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
 
-        {/* Enhanced Fade edges with multiple layers */}
-        <div className="absolute top-0 left-0 w-56 h-full bg-gradient-to-r from-gray-900 via-gray-900/90 via-gray-900/60 to-transparent pointer-events-none z-10" />
-        <div className="absolute top-0 right-0 w-56 h-full bg-gradient-to-l from-gray-900 via-gray-900/90 via-gray-900/60 to-transparent pointer-events-none z-10" />
-        
-        {/* Inner glow gradients */}
-        <div className="absolute top-0 left-56 w-20 h-full bg-gradient-to-r from-blue-500/10 via-purple-500/5 to-transparent pointer-events-none z-10" />
-        <div className="absolute top-0 right-56 w-20 h-full bg-gradient-to-l from-blue-500/10 via-purple-500/5 to-transparent pointer-events-none z-10" />
-        
-        {/* Outer shadow edges */}
-        <div className="absolute top-0 left-0 w-24 h-full bg-gradient-to-r from-black/40 to-transparent pointer-events-none z-10" />
-        <div className="absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-black/40 to-transparent pointer-events-none z-10" />
+          {/* Overlays */}
+          <div className="absolute left-0 top-0 h-full w-10 sm:w-20 pointer-events-none bg-gradient-to-r from-black/90 to-transparent" />
+          <div className="absolute right-0 top-0 h-full w-10 sm:w-20 pointer-events-none bg-gradient-to-l from-black/90 to-transparent" />
+        </div>
       </div>
 
+      {/* Modal */}
       {selectedVideo && (
-        <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black/95 backdrop-blur-md z-50 flex items-center justify-center p-4 sm:p-6">
           <button
             onClick={closeVideoModal}
-            className="absolute top-8 right-8 z-60 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full p-3 transition-colors duration-200 border border-white/10"
+            className="absolute top-6 right-6 z-60 bg-white/10 hover:bg-white/20 backdrop-blur-xl rounded-full p-3 transition-all duration-300 border border-white/20 hover:border-white/30 shadow-2xl hover:shadow-white/10"
           >
             <X className="w-6 h-6 text-white" />
           </button>
 
-          <div className="relative w-full max-w-5xl aspect-video">
+          <div className="relative w-full max-w-6xl aspect-video rounded-2xl overflow-hidden shadow-2xl">
             <iframe
               src={getEmbedUrl(selectedVideo)}
               title="YouTube video player"
-              className="w-full h-full rounded-lg shadow-2xl"
+              className="w-full h-full"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />
           </div>
-
-          <div className="absolute inset-0 -z-10" onClick={closeVideoModal} />
         </div>
       )}
 
       <style jsx>{`
-        @keyframes scroll-left {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-33.33%);
-          }
-        }
-        .animate-scroll-left {
-          animation: scroll-left 60s linear infinite;
-        }
-        .animate-scroll-left:hover {
-          animation-play-state: paused;
-        }
         .scrollbar-hide {
           -ms-overflow-style: none;
           scrollbar-width: none;

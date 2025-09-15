@@ -1,7 +1,8 @@
 'use client'
 import React, { useRef, useEffect, useState } from 'react';
 import { motion } from "framer-motion";
-import { CheckCircle, Target, Zap, Users, Trophy, Star } from 'lucide-react';
+import { Music, Camera, Zap, PenTool, Film, Palette } from 'lucide-react';
+import Link from "next/link";
 
 const About = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -37,11 +38,13 @@ const About = () => {
   }, [hasAnimated]);
 
   const features = [
-    { icon: <Zap className="w-5 h-5" />, text: "Pro-level Video Editing" },
-    { icon: <Target className="w-5 h-5" />, text: "YouTube Strategy & Growth Consulting" },
-    { icon: <Star className="w-5 h-5" />, text: "SEO-Optimized Titles, Tags & Descriptions" },
-    { icon: <Trophy className="w-5 h-5" />, text: "Custom Thumbnail Design that grabs attention" },
-    { icon: <Users className="w-5 h-5" />, text: "Channel audits & content planning to boost reach and retention" }
+    { icon: <Zap className="w-5 h-5" />, text: "Cinematic Video Production" },
+    { icon: <Palette className="w-5 h-5" />, text: "Professional Color Grading" },
+    { icon: <Film className="w-5 h-5" />, text: "Advanced Post-Production" },
+    { icon: <PenTool className="w-5 h-5" />, text: "Scriptwriting & Storyboarding" },
+    { icon: <Camera className="w-5 h-5" />, text: "Ad Films & Commercials" },
+    { icon: <Music className="w-5 h-5" />, text: "Music Video Direction" },
+
   ];
 
   const stats = [
@@ -82,7 +85,7 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mb-16"
           >
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 mt-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
               About Byxbyte Media
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-8 rounded-full"></div>
@@ -161,15 +164,20 @@ const About = () => {
           </motion.div>
 
           {/* Call to Action */}
+        
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, delay: 1.4 }}
             className="mt-16 text-center"
           >
-            <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full text-white font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/25">
+            <Link
+              href="/Contact"
+              className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full text-white font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/25 inline-block"
+            >
               Start Your Project
-            </button>
+            </Link>
           </motion.div>
         </motion.div>
       </div>

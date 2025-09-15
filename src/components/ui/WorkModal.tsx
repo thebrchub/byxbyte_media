@@ -98,7 +98,8 @@ export default function WorkModal({ work, onClose }: WorkModalProps) {
           </div>
 
           {/* Content */}
-          <div className="p-6 max-h-[65vh] overflow-y-auto space-y-6">
+          <div className="p-6 max-h-[65vh] overflow-y-auto space-y-6 custom-scrollbar">
+
             {/* Overview */}
             {activeTab === "overview" && (
               <motion.div
@@ -132,11 +133,12 @@ export default function WorkModal({ work, onClose }: WorkModalProps) {
                         {album.images.map((img, idx) => (
                           <div
                             key={idx}
-                            className="aspect-video rounded-xl overflow-hidden bg-gray-900"
+                            className="aspect-video rounded-xl overflow-hidden bg-gray-900 relative"
                           >
                             <Image
                               src={img}
                               alt={`${album.title} ${idx + 1}`}
+                              fill
                               className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                             />
                           </div>

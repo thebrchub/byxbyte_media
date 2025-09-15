@@ -258,7 +258,7 @@ export const servicesData: Service[] = [
     className: "md:col-span-2 lg:col-span-1 row-span-2 h-96 md:h-[32rem]",
     titleClassName: "justify-start items-start text-white",
     descriptionClassName: "text-gray-300",
-    img: "/works/works03.jpg",
+    img: "/works/works03.png",
     imgClassName: "w-full h-full opacity-30",
     spareImg: "/works/post02.jpg", // ✅ added alternate
   },
@@ -299,7 +299,7 @@ export const servicesData: Service[] = [
   },
   {
     id: 6,
-    title: "Let&apos;s Create Something Amazing",
+    title: "Let's Create Something Amazing",
     description: "Ready to bring your vision to life? Get in touch with us today.",
     detailedDescription: "",
     features: [],

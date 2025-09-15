@@ -1,8 +1,8 @@
-// Enhanced BentoGrid.tsx (replace your old file)
+// Enhanced BentoGrid.tsx (fixed Image issues)
 "use client";
 import React, { useState } from "react";
 import { cn } from "@/utils/cn";
-import Image from 'next/image';
+import Image from "next/image";
 
 /* ---------- BentoGrid ---------- */
 export const BentoGrid = ({
@@ -41,9 +41,16 @@ const InfiniteScrollMedia = ({
   const [isPaused, setIsPaused] = useState(false);
 
   const speedClass = {
-    slow: direction === "horizontal" ? "animate-scroll-x-slow" : "animate-scroll-y-slow",
-    normal: direction === "horizontal" ? "animate-scroll-x" : "animate-scroll-y",
-    fast: direction === "horizontal" ? "animate-scroll-x-fast" : "animate-scroll-y-fast",
+    slow:
+      direction === "horizontal"
+        ? "animate-scroll-x-slow"
+        : "animate-scroll-y-slow",
+    normal:
+      direction === "horizontal" ? "animate-scroll-x" : "animate-scroll-y",
+    fast:
+      direction === "horizontal"
+        ? "animate-scroll-x-fast"
+        : "animate-scroll-y-fast",
   } as const;
 
   return (
@@ -54,7 +61,7 @@ const InfiniteScrollMedia = ({
     >
       <div
         className={cn(
-          "flex",
+          "flex w-full h-full",
           direction === "horizontal" ? "flex-row" : "flex-col",
           speedClass[speed],
           isPaused && "pause-animation"
@@ -65,7 +72,7 @@ const InfiniteScrollMedia = ({
         {media.map((item, idx) => (
           <div
             key={`first-${idx}`}
-            className="flex-shrink-0 w-full h-full mr-4"
+            className="relative flex-shrink-0 w-full h-full mr-4 overflow-hidden rounded-lg"
           >
             {item.type === "video" ? (
               <video
@@ -74,29 +81,43 @@ const InfiniteScrollMedia = ({
                 muted
                 loop
                 playsInline
-                className="w-full h-full object-cover rounded-lg"
+                className="w-full h-full object-cover"
               />
             ) : (
               <Image
                 src={item.src}
                 alt={item.alt || "media"}
-                className="w-full h-full object-cover rounded-lg"
+                fill
+                className="object-cover"
+                sizes="100vw"
               />
             )}
           </div>
-
         ))}
 
         {/* duplicate for seamless loop */}
         {media.map((item, idx) => (
           <div
             key={`second-${idx}`}
-            className={cn("flex-shrink-0", direction === "horizontal" ? "w-80 h-full mr-4" : "w-full h-80 mb-4")}
+            className="relative flex-shrink-0 w-full h-full mr-4 overflow-hidden rounded-lg"
           >
             {item.type === "video" ? (
-              <video src={item.src} autoPlay muted loop playsInline className="w-full h-full object-cover rounded-lg" />
+              <video
+                src={item.src}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+              />
             ) : (
-              <Image src={item.src} alt={item.alt || "media"} className="w-full h-full object-cover rounded-lg" />
+              <Image
+                src={item.src}
+                alt={item.alt || "media"}
+                fill
+                className="object-cover"
+                sizes="100vw"
+              />
             )}
           </div>
         ))}
@@ -105,9 +126,9 @@ const InfiniteScrollMedia = ({
   );
 };
 
-/* ---------- BentoGridItem (supports `movingItems` alias) ---------- */
+
+/* ---------- BentoGridItem ---------- */
 type RawMovingItem = {
-  // accept either shape so existing code can pass arrays of objects like { img: '/x.jpg' } or { src: '/x.jpg' }
   src?: string;
   img?: string;
   type?: "image" | "video";
@@ -126,7 +147,7 @@ export const BentoGridItem = ({
   spareImg,
   onClick,
   media = [],
-  movingItems = [], // <-- this fixes your TS error
+  movingItems = [],
   scrollDirection = "horizontal",
   scrollSpeed = "normal",
 }: {
@@ -140,18 +161,15 @@ export const BentoGridItem = ({
   descriptionClassName?: string;
   spareImg?: string;
   onClick?: () => void;
-  // canonical media shape
   media?: MediaItem[];
-  // legacy / custom shape developers might pass
   movingItems?: RawMovingItem[];
   scrollDirection?: "horizontal" | "vertical";
   scrollSpeed?: "slow" | "normal" | "fast";
 }) => {
-  // normalize media: prefer `media` prop, else map `movingItems`
   const normalizedMedia: MediaItem[] =
-    (media && media.length > 0)
+    media.length > 0
       ? media
-      : (movingItems && movingItems.length > 0)
+      : movingItems.length > 0
       ? movingItems.map((m) => ({
           src: m.src || m.img || "",
           type: m.type || "image",
@@ -159,28 +177,24 @@ export const BentoGridItem = ({
         }))
       : [];
 
-  // grid sizing helper
-  // inside BentoGridItem
   const getGridClasses = (id: number) => {
-  switch (id) {
-    case 1: // Video Production
-      return "col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-2 row-span-1 h-64";
-    case 2: // Color Grading
-      return "col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-2 row-span-1 h-64";
-    case 3: // Post Production (wider)
-      return "col-span-1 md:col-span-4 lg:col-span-4 xl:col-span-4 row-span-1 h-64";
-    case 4: // Script Writing
-      return "col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-2 row-span-1 h-64";
-    case 5: // Storyboarding
-      return "col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-2 row-span-1 h-64";
-    case 6: // CTA / full-width section
-      return "col-span-1 md:col-span-4 lg:col-span-4 xl:col-span-4 row-span-1 h-48";
-    default:
-      return "col-span-1 md:col-span-1 lg:col-span-1 xl:col-span-1 row-span-1 h-64";
-  }
-};
-
-
+    switch (id) {
+      case 1:
+        return "col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-2 row-span-1 h-64";
+      case 2:
+        return "col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-2 row-span-1 h-64";
+      case 3:
+        return "col-span-1 md:col-span-4 lg:col-span-4 xl:col-span-4 row-span-1 h-64";
+      case 4:
+        return "col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-2 row-span-1 h-64";
+      case 5:
+        return "col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-2 row-span-1 h-64";
+      case 6:
+        return "col-span-1 md:col-span-4 lg:col-span-4 xl:col-span-4 row-span-1 h-48";
+      default:
+        return "col-span-1 md:col-span-1 lg:col-span-1 xl:col-span-1 row-span-1 h-64";
+    }
+  };
 
   return (
     <div
@@ -192,10 +206,12 @@ export const BentoGridItem = ({
       )}
       style={{
         background: "rgba(4,7,29,0.8)",
-        backgroundImage: "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
+        backgroundImage:
+          "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
       }}
     >
       {/* Background Media */}
+            
       <div className="absolute inset-0 z-0">
         {normalizedMedia.length > 0 ? (
           <InfiniteScrollMedia
@@ -207,25 +223,33 @@ export const BentoGridItem = ({
         ) : (
           <>
             {img && (
-              <Image
-                src={img}
-                alt={typeof title === "string" ? title : "Service"}
-                className={cn(
-                  imgClassName,
-                  "object-cover object-center w-full h-full opacity-40 group-hover/bento:opacity-60 transition-opacity duration-500"
-                )}
-              />
+              <div className="absolute inset-0 relative">
+                <Image
+                  src={img}
+                  alt={typeof title === "string" ? title : "Service"}
+                  fill
+                  className={cn(
+                    imgClassName,
+                    "object-cover object-center opacity-40 group-hover/bento:opacity-60 transition-opacity duration-500 rounded-3xl"
+                  )}
+                />
+              </div>
             )}
             {spareImg && (
-              <Image
-                src={spareImg}
-                alt={typeof title === "string" ? title : "Service"}
-                className="absolute right-0 bottom-0 object-cover object-center w-full h-full opacity-40 group-hover/bento:opacity-60 transition-opacity duration-500"
-              />
+              <div className="absolute inset-0 relative">
+                <Image
+                  src={spareImg}
+                  alt={typeof title === "string" ? title : "Service"}
+                  fill
+                  className="object-cover object-center opacity-40 group-hover/bento:opacity-60 transition-opacity duration-500 rounded-3xl"
+                />
+              </div>
             )}
           </>
         )}
       </div>
+
+
 
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-1"></div>
@@ -259,8 +283,18 @@ export const BentoGridItem = ({
         ) : (
           <div className="mt-4 flex items-center text-blue-400 group-hover/bento:text-blue-300 transition-colors duration-300 opacity-0 group-hover/bento:opacity-100 transform translate-y-2 group-hover/bento:translate-y-0 transition-all duration-300">
             <span className="text-sm font-medium">View Details</span>
-            <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            <svg
+              className="w-4 h-4 ml-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
             </svg>
           </div>
         )}
